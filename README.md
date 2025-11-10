@@ -27,7 +27,7 @@ By the end of this lab, you will be able to:
 
 ## Architecture Diagram
 
-The architecture mirrors the original AWS flow:
+The architecture:
 
 1. A **Linux VM** (build host) builds a Docker image.
 2. The image is pushed to a **private ACR** repository.
@@ -42,10 +42,7 @@ Diagram (conceptual):
 - **Azure Container Registry (ACR)**
 - **(Optional) Build VM** inside Azure used to build & push image.
 
-You can represent this visually as:
-
-`Client → App Service (Web App for Containers) → ACR`  
-All inside a single **Resource Group** in one **Azure Region**.
+![Azure Container App Lab 8](./azure-container-app-lab8.png)
 
 ---
 
