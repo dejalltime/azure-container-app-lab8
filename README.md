@@ -143,11 +143,14 @@ Wait until the VM is in **Running** state.
 
 ### 3.2 Connect to the VM & Install Docker
 
-SSH into the VM from your terminal:
+Connect to the VM via Azure Bastion
 
-```bash
-ssh azureuser@<VM_PUBLIC_IP>
-```
+1. In the Azure Portal, open your VM: `vm-app-lab7`.
+2. Click **Connect → Bastion**.
+3. Enter:
+   - **Username:** `azureuser`
+   - **Authentication type:** Use the SSH key generated earlier or your portal credentials.
+4. Click **Connect** — a secure terminal session will open in your browser.
 
 Then run:
 
