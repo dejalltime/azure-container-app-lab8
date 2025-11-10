@@ -75,7 +75,6 @@ Use (or adapt) the following names:
 - App Service Plan: `lab8-asp-linux`
 - Web App (Container): `lab8-webapp-<unique>`
 - Image Name: `lab8-node-app`
-- Tag: `v1`
 
 </details>
 
