@@ -273,7 +273,7 @@ You should now see it under
 <details>
 <summary><b>4️ Deploy the Docker Image with Azure App Service (Web App for Containers)</b></summary>
 
-Now we’ll deploy the ACR image to **Azure App Service** — this is your **Elastic Beanstalk-style** managed environment.
+Now we’ll deploy the ACR image to **Azure App Service**.
 
 ### 4.1 Create an App Service Plan (Linux)
 
@@ -284,7 +284,7 @@ Now we’ll deploy the ACR image to **Azure App Service** — this is your **Ela
    - Name: `lab8-asp-linux`
    - Operating system: **Linux**
    - Region: `Canada Central`
-3. Pricing plan: choose **Basic B1** or a low dev tier.
+3. Pricing plan: choose **Basic B1** or a low dev tier **Free F1**.
 4. Click **Review + create → Create**.
 
 ---
@@ -302,11 +302,10 @@ Now we’ll deploy the ACR image to **Azure App Service** — this is your **Ela
    - Region: `Canada Central`
    - App Service plan: `lab8-asp-linux`
 
-3. Click **Next: Docker**.
+3. Click **Next: Container**.
 
-4. **Docker tab:**
+4. **Container tab:**
 
-   - Options: **Single Container**
    - Image Source: **Azure Container Registry**
    - Registry: select your `lab8acr<unique>`
    - Image: `lab8-node-app`
