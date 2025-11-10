@@ -175,56 +175,56 @@ docker --version
 
 ---
 
-### 3.3 Install Azure CLI (if not pre-installed on the VM)
+### 3.3 Verify Docker Installation
 
 ```bash
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+sudo apt-get update -y
+sudo apt-get install -y ca-certificates curl gnupg lsb-release
+sudo apt-get install -y docker.io
+sudo systemctl enable --now docker
+docker --version
 ```
 
-Login (device code flow):
+Add your user to the Docker group:
 
 ```bash
-az login
+sudo usermod -aG docker $USER
+newgrp docker
 ```
-
-Select the correct subscription if prompted.
 
 ---
 
-### 3.4 Retrieve ACR Details & Login
+### 3.4 Retrieve ACR Details & Login (Manual)
 
-Set variables (replace with your actual ACR name):
+1. In the **Azure Portal**, open your **Container Registry**.
+2. Go to **Access keys** → Copy:
+   - **Login server** (e.g., `lab8acr12345.azurecr.io`)
+   - **Username**
+   - **Password**
+
+Log in from Bastion:
 
 ```bash
-ACR_NAME="lab8acr<unique>"
-IMAGE_NAME="lab8-node-app"
-TAG="v1"
+docker login <ACR_LOGIN_SERVER> -u <USERNAME> -p <PASSWORD>
 ```
 
-Login to ACR:
+Example:
 
 ```bash
-az acr login --name $ACR_NAME
-```
-
-Get the ACR login server:
-
-```bash
-ACR_LOGIN_SERVER=$(az acr show --name $ACR_NAME --query "loginServer" -o tsv)
-echo $ACR_LOGIN_SERVER
+docker login lab8acr12345.azurecr.io -u lab8acr12345 -p MySecretPassword
 ```
 
 ---
 
 ### 3.5 Fetch Sample App & Dockerfile
 
-Inside the VM:
+Create the working directory and Dockerfile:
 
 ```bash
 mkdir lab8-app && cd lab8-app
 ```
 
-Create a simple `Dockerfile`:
+Create the Dockerfile:
 
 ```bash
 cat << 'EOF' > Dockerfile
@@ -244,32 +244,37 @@ CMD ["serve", "-s", ".", "-l", "8080"]
 EOF
 ```
 
-(This mirrors the simple static Docker app from the AWS lab.)
-
 ---
 
 ### 3.6 Build, Tag & Push Image to ACR
 
-Build:
+Set your ACR and image variables:
+
+```bash
+ACR_LOGIN_SERVER="lab8acr12345.azurecr.io"
+IMAGE_NAME="lab8-node-app"
+TAG="v1"
+```
+
+Build the Docker image:
 
 ```bash
 docker build -t $IMAGE_NAME:$TAG .
 ```
 
-Tag:
+Tag the image:
 
 ```bash
 docker tag $IMAGE_NAME:$TAG $ACR_LOGIN_SERVER/$IMAGE_NAME:$TAG
 ```
 
-Push:
+Push the image:
 
 ```bash
 docker push $ACR_LOGIN_SERVER/$IMAGE_NAME:$TAG
 ```
 
-You should now see the image under:
-
+You should now see it under  
 **ACR → Repositories → `lab8-node-app` → `v1`**
 
 </details>
