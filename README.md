@@ -99,14 +99,13 @@ We’ll start by creating a **private** Azure Container Registry to store our Do
    - Region: `Canada Central`
    - SKU: **Basic**
    - Resource group: `acr-appservice-lab8-rg`
-   - Admin user: **Disabled** (we’ll use Azure identity or `az acr login`)
+   <!-- - Admin user: **Disabled** (we’ll use Azure identity or `az acr login`) -->
    - Click **Review + create → Create**.
 
 Once deployment is complete:
 
 - Go to your ACR resource.
-- Note the **Login server**, e.g. `lab8acr<unique>.azurecr.io`.  
-  This is the equivalent of `ACCOUNT_ID.dkr.ecr...` in AWS.
+- Note the **Login server**, e.g. `lab8acr<unique>.azurecr.io`.
 
 </details>
 
