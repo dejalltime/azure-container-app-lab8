@@ -163,14 +163,6 @@ echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docke
 
 sudo apt-get update -y
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-sudo usermod -aG docker azureuser
-newgrp docker
-```
-
-Verify:
-
-```bash
-docker --version
 ```
 
 ---
@@ -178,11 +170,8 @@ docker --version
 ### 3.3 Verify Docker Installation
 
 ```bash
-sudo apt-get update -y
-sudo apt-get install -y ca-certificates curl gnupg lsb-release
-sudo apt-get install -y docker.io
-sudo systemctl enable --now docker
 docker --version
+sudo systemctl status docker
 ```
 
 Add your user to the Docker group:
